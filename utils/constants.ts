@@ -69,7 +69,7 @@ export const DEMO_DATA = {
       },
       update: (updates: any) => ({
         eq: (column: string, value: string) => {
-          const index = mockData.findIndex((item) => item[column] === value)
+          const index = mockData.findIndex((item) => item[column as keyof Todo] === value)
           if (index !== -1) {
             mockData[index] = { ...mockData[index], ...updates }
           }
@@ -78,7 +78,7 @@ export const DEMO_DATA = {
       }),
       delete: () => ({
         eq: (column: string, value: string) => {
-          mockData = mockData.filter((item) => item[column] !== value)
+          mockData = mockData.filter((item) => item[column as keyof Todo] !== value)
           return Promise.resolve({ data: null, error: null })
         },
       }),
